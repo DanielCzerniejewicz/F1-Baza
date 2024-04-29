@@ -1,0 +1,92 @@
+CREATE DATABASE IF NOT EXISTS `F1`;
+USE F1;
+DROP TABLE IF EXISTS `Zespoly`;
+DROP TABLE IF EXISTS `Kierowcy`;
+DROP TABLE IF EXISTS `Punktacja`;
+
+-- Zespoly
+CREATE TABLE `Zespoly`(
+    Nazwa_Zespolu varchar(20),
+    ID_Zespolu int(2) PRIMARY KEY
+);
+INSERT INTO Zespoly (Nazwa_Zespolu,ID_Zespolu) VALUES
+    ("Redbull Racing",1),
+    ("Scuderia Ferrari",2),
+    ("McLaren",3),
+    ("Aston Martin",4),
+    ("Mercedes AMG",5),
+    ("HAAS",6),
+    ("Alpine Renault",7),
+    ("Alfa Romeo",8),
+    ("Wiliams",9),
+    ("Alphatauri",10);
+
+-- KIEROWCYYYY
+
+CREATE TABLE IF NOT EXISTS `Kierowcy`(
+    ID_Kierowcy int(2) PRIMARY KEY,
+    ID_Zespolu int(2) REFERENCES Zespoly(ID_Zespolu),
+    Nazwisko varchar (25),
+    Imie varchar (25)
+);
+
+INSERT INTO Kierowcy (ID_Kierowcy,ID_Zespolu,Nazwisko,Imie) VALUES
+    (5,3,"Norris","Lando"),
+    (10,5,"Russel","George"),
+    (18,9,"Sargeant","Logan"),
+    (2,1,"Perez","Sergio"),
+    (8,4,"Alonso","Fernando"),
+    (4,2,"Leclerc","Charles"),
+    (9,5,"Hamilton","Lewis"),
+    (7,4,"Stroll","Lance"),
+    (12,6,"Hulkenberg","Nico"),
+    (15,8,"Zhou","Guanyu"),
+    (6,3,"Piastri","Oscar"),
+    (16,8,"Bottas","Valtteri"),
+    (3,2,"Sainz","Carlos"), -- Smooth operator <3
+    (11,6,"Magnussen","Kevin"),
+    (20,10,"De Vries","Nyck"),
+    (13,7,"Gasly","Pierre"),
+    (19,10,"Tsunoda","Yuki"),
+    (14,7,"Ocon","Estaban"), -- 5 Sec penalty!
+    (1,1,"Verstappen","Max"),
+    (17,9,"Albon","Alexander");
+
+-- Sezon 2022
+
+
+CREATE TABLE IF NOT EXISTS `Punktacja`(
+    Nr_Wyscigu int(2),
+    Miasto varchar(25),
+    Kraj varchar(25),
+    Zwycięzca int(2) REFERENCES Kierowcy(ID_Kierowcy);
+)
+
+
+INSERT INTO Punktacja (Nr_Wyscigu, Miasto, Kraj, Zwycięzca) VALUES
+    (1, 'Melbourne', 'Australia', 1), -- Max Verstappen
+    (2, 'Jeddah', 'Arabia Saudyjska', 3), -- Lando Norris
+    (3, 'Sakhir', 'Bahrajn', 2), -- Charles Leclerc
+    (4, 'Hanoi', 'Wietnam', 5), -- George Russell
+    (5, 'Szanghaj', 'Chiny', 1), -- Max Verstappen
+    (6, 'Zandvoort', 'Holandia', 1), -- Max Verstappen
+    (7, 'Montmeló', 'Hiszpania', 9), -- Lewis Hamilton
+    (8, 'Monte Carlo', 'Monako', 4), -- Fernando Alonso
+    (9, 'Baku', 'Azerbejdżan', 3), -- Lando Norris
+    (10, 'Montreal', 'Kanada', 1), -- Max Verstappen
+    (11, 'Le Castellet', 'Francja', 1), -- Max Verstappen
+    (12, 'Spielberg', 'Austria', 5), -- George Russell
+    (13, 'Silverstone', 'Wielka Brytania', 4), -- Lance Stroll
+    (14, 'Hockenheim', 'Niemcy', 3), -- Lando Norris
+    (15, 'Budapeszt', 'Węgry', 5), -- George Russell
+    (16, 'Spa-Francorchamps', 'Belgia', 4), -- Fernando Alonso
+    (17, 'Monza', 'Włochy', 1), -- Max Verstappen
+    (18, 'Singapur', 'Singapur', 1), -- Max Verstappen
+    (19, 'Soczi', 'Rosja', 2), -- Charles Leclerc
+    (20, 'Suzuka', 'Japonia', 1), -- Max Verstappen
+    (21, 'Austin', 'Stany Zjednoczone', 3), -- Lando Norris
+    (22, 'Meksyk', 'Meksyk', 1), -- Max Verstappen
+    (23, 'São Paulo', 'Brazylia', 3), -- Lando Norris
+    (24, 'Melbourne', 'Australia', 9), -- Lewis Hamilton
+    (25, 'Dżudda', 'Arabia Saudyjska', 1), -- Max Verstappen
+    (26, 'Abu Zabi', 'Zjednoczone Emiraty Arabskie', 1); -- Max Verstappen
